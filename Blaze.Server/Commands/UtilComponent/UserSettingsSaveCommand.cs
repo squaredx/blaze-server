@@ -9,22 +9,22 @@ namespace Blaze.Server
 {
     class UserSettingsSaveCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} saving user settings for user {1}", client.ID, client.User.ID));
+            Log.Info(string.Format("Client {0} saving user settings for user {1}", request.Client.ID, request.Client.User.ID));
 
             var data = (TdfString)request.Data["DATA"];
 
-            Directory.CreateDirectory(string.Format(".\\data\\{0}", client.User.ID));
+            Directory.CreateDirectory(string.Format(".\\data\\{0}", request.Client.User.ID));
 
-            if (File.Exists(string.Format(".\\data\\{0}\\user_settings", client.User.ID)))
+            if (File.Exists(string.Format(".\\data\\{0}\\user_settings", request.Client.User.ID)))
             {
-                File.Delete(string.Format(".\\data\\{0}\\user_settings", client.User.ID));
+                File.Delete(string.Format(".\\data\\{0}\\user_settings", request.Client.User.ID));
             }
 
-            File.WriteAllBytes(string.Format(".\\data\\{0}\\user_settings", client.User.ID), Encoding.ASCII.GetBytes(data.Value));
+            File.WriteAllBytes(string.Format(".\\data\\{0}\\user_settings", request.Client.User.ID), Encoding.ASCII.GetBytes(data.Value));
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

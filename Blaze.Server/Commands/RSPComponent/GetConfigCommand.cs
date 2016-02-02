@@ -8,16 +8,16 @@ namespace Blaze.Server
 {
     class GetConfigCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requested RSP configuration", client.ID));
+            Log.Info(string.Format("Client {0} requested RSP configuration", request.Client.ID));
 
             foreach (var tdf in request.Data)
             {
                 Log.Info(tdf.Key + "(" + tdf.Value.Type + ")");
             }
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

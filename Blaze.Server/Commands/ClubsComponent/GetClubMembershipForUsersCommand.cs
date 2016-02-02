@@ -8,11 +8,11 @@ namespace Blaze.Server
 {
     class GetClubMembershipForUsersCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requested club memberships", client.ID));
+            Log.Info(string.Format("Client {0} requested club memberships", request.Client.ID));
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

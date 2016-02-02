@@ -82,8 +82,8 @@
     <Compile Include="Commands\GameReportingComponent\SubmitTrustedMidGameReportCommand.cs" />
     <Compile Include="Commands\RedirectorComponent\GetServerInstanceCommand.cs" />
     <Compile Include="Commands\RSPComponent\GetConfigCommand.cs" />
-    <Compile Include="Commands\StatsComponent\GetStatGroupCommand.cs" />
     <Compile Include="Commands\StatsComponent\GetStatsByGroupAsyncCommand.cs" />
+    <Compile Include="Commands\StatsComponent\GetStatGroupCommand.cs" />
     <Compile Include="Commands\UserSessionsComponent\UpdateNetworkInfoCommand.cs" />
     <Compile Include="Commands\UtilComponent\FetchClientConfigCommand.cs" />
     <Compile Include="Commands\UtilComponent\GetTelemetryServerCommand.cs" />

@@ -9,11 +9,11 @@ namespace Blaze.Server
 {
     class LoginCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var email = (TdfString)request.Data["MAIL"];
 
-            Log.Info(string.Format("Client {0} logging in with email {1}", client.ID, email.Value));
+            Log.Info(string.Format("Client {0} logging in with email {1}", request.Client.ID, email.Value));
 
             var user = Configuration.Users.Find(u => u.Email == email.Value);
 
@@ -23,7 +23,7 @@ namespace Blaze.Server
                 return;
             }
 
-            client.User = user;
+            request.Client.User = user;
 
             var data = new List<Tdf>
             {
@@ -48,10 +48,10 @@ namespace Blaze.Server
                 new TdfString("THST", ""),
                 new TdfString("TSUI", ""),
                 new TdfString("TURI", ""),
-                new TdfInteger("UID", (ulong)client.ID)
+                new TdfInteger("UID", (ulong)request.Client.ID)
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
         }
     }
 }

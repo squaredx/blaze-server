@@ -8,7 +8,7 @@ namespace Blaze.Server
 {
     class CreateGameCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var attr = (TdfMap)request.Data["ATTR"];
             var gameName = (TdfString)request.Data["GNAM"];
@@ -26,7 +26,7 @@ namespace Blaze.Server
 
             var game = new Game();
 
-            game.ClientID = client.ID;
+            game.ClientID = request.Client.ID;
 
             game.Name = gameName.Value;
             game.Attributes = attr.Map;
@@ -46,27 +46,27 @@ namespace Blaze.Server
 
             game.Settings = gameSettings.Value;
 
-            game.InternalIP = client.InternalIP;
-            game.InternalPort = client.InternalPort;
+            game.InternalIP = request.Client.InternalIP;
+            game.InternalPort = request.Client.InternalPort;
 
-            game.ExternalIP = client.ExternalIP;
-            game.ExternalPort = client.ExternalPort;
+            game.ExternalIP = request.Client.ExternalIP;
+            game.ExternalPort = request.Client.ExternalPort;
 
             GameManager.Add(game);
 
-            client.GameID = game.ID;
+            request.Client.GameID = game.ID;
 
-            Log.Info(string.Format("Client {0} creating game {1} ({2})", client.ID, game.ID, game.Name));
+            Log.Info(string.Format("Client {0} creating game {1} ({2})", request.Client.ID, game.ID, game.Name));
 
             var data = new List<Tdf>
             {
                 new TdfInteger("GID", (ulong)game.ID)
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
 
-            GameStateChangeNotification.Notify(client);
-            GameSetupNotification.Notify(client);
+            GameStateChangeNotification.Notify(request.Client);
+            GameSetupNotification.Notify(request.Client);
         }
     }
 }

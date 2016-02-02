@@ -9,9 +9,9 @@ namespace Blaze.Server
 {
     class PreAuthCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} pre-authenticating", client.ID));
+            Log.Info(string.Format("Client {0} pre-authenticating", request.Client.ID));
 
             var clientData = (TdfStruct)request.Data["CDAT"];
             var clientType = (TdfInteger)clientData.Data.Find(tdf => tdf.Label == "TYPE");
@@ -20,9 +20,9 @@ namespace Blaze.Server
             var clientInfo = (TdfStruct)request.Data["CINF"];
             var clientLocalization = (TdfInteger)clientInfo.Data.Find(tdf => tdf.Label == "LOC");
 
-            client.Type = (ClientType)clientType.Value;
-            client.Localization = (ulong)clientLocalization.Value;
-            client.Service = clientService.Value;
+            request.Client.Type = (ClientType)clientType.Value;
+            request.Client.Localization = (ulong)clientLocalization.Value;
+            request.Client.Service = clientService.Value;
 
             // TODO: fix this
             var cids = new TdfList("CIDS", TdfBaseType.Integer, new ArrayList
@@ -48,7 +48,7 @@ namespace Blaze.Server
                         { "xlspConnectionIdleTimeout", "300" }
                     })
                 }),
-                new TdfString("INST", client.Service),
+                new TdfString("INST", request.Client.Service),
                 new TdfInteger("MINR", 0),
                 new TdfString("NASP", "cem_ea_id"),
                 new TdfString("PILD", ""),
@@ -79,7 +79,7 @@ namespace Blaze.Server
                 new TdfString("SVER", "Blaze 3.15.08.0 (CL# 1060080)")
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
         }
     }
 }

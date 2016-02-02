@@ -8,11 +8,11 @@ namespace Blaze.Server
 {
     class SubmitTrustedMidGameReportCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} submitting trusted mid-game report", client.ID));
+            Log.Info(string.Format("Client {0} submitting trusted mid-game report", request.Client.ID));
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

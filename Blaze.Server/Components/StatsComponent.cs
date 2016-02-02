@@ -8,16 +8,16 @@ namespace Blaze.Server
 {
     class StatsComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 4:
-                    GetStatGroupCommand.HandleRequest(client, request);
+                    GetStatGroupCommand.HandleRequest(request);
                     break;
 
                 case 0x10:
-                    GetStatsByGroupAsyncCommand.HandleRequest(client, request);
+                    GetStatsByGroupAsyncCommand.HandleRequest(request);
                     break;
 
                 default:

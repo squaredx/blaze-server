@@ -76,7 +76,7 @@ namespace Blaze.Server
             var decoder = new TdfDecoder(payload);
             var requestData = decoder.Decode();
 
-            var request = new Request();
+            var request = new Request(this);
 
             request.ComponentID = componentID;
             request.CommandID = (ushort)commandID;
@@ -92,39 +92,39 @@ namespace Blaze.Server
             switch (request.ComponentID)
             {
                 case Component.Authentication:
-                    AuthenticationComponent.HandleRequest(this, request);
+                    AuthenticationComponent.HandleRequest(request);
                     break;
 
                 case Component.GameManager:
-                    GameManagerComponent.HandleRequest(this, request);
+                    GameManagerComponent.HandleRequest(request);
                     break;
 
                 case Component.Redirector:
-                    RedirectorComponent.HandleRequest(this, request);
+                    RedirectorComponent.HandleRequest(request);
                     break;
 
                 case Component.Stats:
-                    StatsComponent.HandleRequest(this, request);
+                    StatsComponent.HandleRequest(request);
                     break;
 
                 case Component.Util:
-                    UtilComponent.HandleRequest(this, request);
+                    UtilComponent.HandleRequest(request);
                     break;
 
                 case Component.Clubs:
-                    ClubsComponent.HandleRequest(this, request);
+                    ClubsComponent.HandleRequest(request);
                     break;
 
                 case Component.GameReporting:
-                    GameReportingComponent.HandleRequest(this, request);
+                    GameReportingComponent.HandleRequest(request);
                     break;
 
                 case Component.RSP:
-                    RSPComponent.HandleRequest(this, request);
+                    RSPComponent.HandleRequest(request);
                     break;
 
                 case Component.UserSessions:
-                    UserSessionsComponent.HandleRequest(this, request);
+                    UserSessionsComponent.HandleRequest(request);
                     break;
 
                 default:

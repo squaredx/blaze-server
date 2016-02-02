@@ -8,24 +8,24 @@ namespace Blaze.Server
 {
     class AuthenticationComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 0x28:
-                    LoginCommand.HandleRequest(client, request);
+                    LoginCommand.HandleRequest(request);
                     break;
 
                 case 0x32:
-                    SilentLoginCommand.HandleRequest(client, request);
+                    SilentLoginCommand.HandleRequest(request);
                     break;
 
                 case 0x6E:
-                    LoginPersonaCommand.HandleRequest(client, request);
+                    LoginPersonaCommand.HandleRequest(request);
                     break;
 
                 case 0x1D:
-                    ListUserEntitlements2Command.HandleRequest(client, request);
+                    ListUserEntitlements2Command.HandleRequest(request);
                     break;
 
                 default:

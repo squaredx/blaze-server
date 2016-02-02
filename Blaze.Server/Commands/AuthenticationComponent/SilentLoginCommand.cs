@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class SilentLoginCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var personaID = (TdfInteger)request.Data["PID"];
 
             var user = Configuration.Users.Find(u => u.ID == personaID.Value);
-            client.User = user;
+            request.Client.User = user;
 
             var data = new List<Tdf>
             {
@@ -24,21 +24,21 @@ namespace Blaze.Server
                 new TdfString("PRIV", ""),
                 new TdfStruct("SESS", new List<Tdf>
                 {
-                    new TdfInteger("BUID", client.User.ID),
+                    new TdfInteger("BUID", request.Client.User.ID),
                     new TdfInteger("FRST", 0),
                     new TdfString("KEY", ""),
                     new TdfInteger("LLOG", 0),
-                    new TdfString("MAIL", client.User.Email),
+                    new TdfString("MAIL", request.Client.User.Email),
                     new TdfStruct("PDTL", new List<Tdf>
                     {
-                        new TdfString("DSNM", client.User.Name),
+                        new TdfString("DSNM", request.Client.User.Name),
                         new TdfInteger("LAST", 0),
-                        new TdfInteger("PID", client.User.ID),
+                        new TdfInteger("PID", request.Client.User.ID),
                         new TdfInteger("STAS", 0),
                         new TdfInteger("XREF", 0),
                         new TdfInteger("XTYP", (ulong)ExternalRefType.Unknown)
                     }),
-                    new TdfInteger("UID", (ulong)client.ID)
+                    new TdfInteger("UID", (ulong)request.Client.ID)
                 }),
                 new TdfInteger("SPAM", 0),
                 new TdfString("THST", ""),
@@ -46,10 +46,10 @@ namespace Blaze.Server
                 new TdfString("TURI", "")
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
 
-            UserAddedNotification.Notify(client, client.User.ID, client.User.Name);
-            UserUpdatedNotification.Notify(client, client.User.ID);
+            UserAddedNotification.Notify(request.Client, request.Client.User.ID, request.Client.User.Name);
+            UserUpdatedNotification.Notify(request.Client, request.Client.User.ID);
         }
     }
 }

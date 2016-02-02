@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class RSPComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 0x32:
-                    GetConfigCommand.HandleRequest(client, request);
+                    GetConfigCommand.HandleRequest(request);
                     break;
 
                 default:

@@ -8,14 +8,14 @@ namespace Blaze.Server
 {
     class PingCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var data = new List<Tdf>
             {
                 new TdfInteger("STIM", Utils.GetUnixTime())
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
         }
     }
 }

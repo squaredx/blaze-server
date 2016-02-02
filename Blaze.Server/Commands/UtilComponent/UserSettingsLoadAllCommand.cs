@@ -9,13 +9,13 @@ namespace Blaze.Server
 {
     class UserSettingsLoadAllCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} loading all user settings for user {1}", client.ID, client.User.ID));
+            Log.Info(string.Format("Client {0} loading all user settings for user {1}", request.Client.ID, request.Client.User.ID));
 
-            if (File.Exists(string.Format(".\\data\\{0}\\user_settings", client.User.ID)))
+            if (File.Exists(string.Format(".\\data\\{0}\\user_settings", request.Client.User.ID)))
             {
-                var userSettings = File.ReadAllBytes(string.Format(".\\data\\{0}\\user_settings", client.User.ID));
+                var userSettings = File.ReadAllBytes(string.Format(".\\data\\{0}\\user_settings", request.Client.User.ID));
 
                 var data = new List<Tdf>
                 {
@@ -25,11 +25,11 @@ namespace Blaze.Server
                     })
                 };
 
-                client.Reply(request, 0, data);
+                request.Reply(0, data);
             }
             else
             {
-                client.Reply(request, 0, null);
+                request.Reply();
             }
         }
     }

@@ -8,11 +8,11 @@ namespace Blaze.Server
 {
     class SetClientMetricsCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} setting metrics", client.ID));
+            Log.Info(string.Format("Client {0} setting metrics", request.Client.ID));
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

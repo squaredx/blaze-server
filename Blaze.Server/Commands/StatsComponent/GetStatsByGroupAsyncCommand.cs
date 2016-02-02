@@ -8,11 +8,11 @@ namespace Blaze.Server
 {
     class GetStatsByGroupAsyncCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requested stats by group", client.ID));
+            Log.Info(string.Format("Client {0} requested stats by group", request.Client.ID));
 
-            GetStatsAsyncNotification.Notify(client);
+            GetStatsAsyncNotification.Notify(request.Client);
         }
     }
 }

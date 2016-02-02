@@ -8,16 +8,16 @@ namespace Blaze.Server
 {
     class GameReportingComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 0x64:
-                    SubmitTrustedMidGameReportCommand.HandleRequest(client, request);
+                    SubmitTrustedMidGameReportCommand.HandleRequest(request);
                     break;
 
                 case 0x65:
-                    SubmitTrustedEndGameReportCommand.HandleRequest(client, request);
+                    SubmitTrustedEndGameReportCommand.HandleRequest(request);
                     break;
 
                 default:

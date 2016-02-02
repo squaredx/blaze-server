@@ -8,19 +8,19 @@ namespace Blaze.Server
 {
     class AdvanceGameStateCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var gameID = (TdfInteger)request.Data["GID"];
             var gameState = (TdfInteger)request.Data["GSTA"];
 
-            Log.Info(string.Format("Client {0} changing game {1} state to {2}", client.ID, gameID.Value, (GameState)gameState.Value));
+            Log.Info(string.Format("Client {0} changing game {1} state to {2}", request.Client.ID, gameID.Value, (GameState)gameState.Value));
 
             var game = GameManager.Games[gameID.Value];
             game.State = (GameState)gameState.Value;
 
-            client.Reply(request, 0, null);
+            request.Reply();
 
-            GameStateChangeNotification.Notify(client);
+            GameStateChangeNotification.Notify(request.Client);
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Blaze.Server
 {
     class FetchClientConfigCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requested client configuration", client.ID));
+            Log.Info(string.Format("Client {0} requested client configuration", request.Client.ID));
 
             var clientConfigID = (TdfString)request.Data["CFID"];
 
@@ -23,7 +23,7 @@ namespace Blaze.Server
                 })
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
         }
     }
 }

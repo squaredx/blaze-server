@@ -9,9 +9,9 @@ namespace Blaze.Server
 {
     class ListUserEntitlements2Command
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requested user entitlements", client.ID));
+            Log.Info(string.Format("Client {0} requested user entitlements", request.Client.ID));
 
             var etag = (TdfString)request.Data["ETAG"];
             bool onlineAccess = (etag.Value == "ONLINE_ACCESS");
@@ -267,11 +267,11 @@ namespace Blaze.Server
                     nlst
                 };
 
-                client.Reply(request, 0, data);
+                request.Reply(0, data);
                 return;
             }
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

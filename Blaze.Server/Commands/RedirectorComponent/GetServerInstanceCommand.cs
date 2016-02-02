@@ -8,9 +8,9 @@ namespace Blaze.Server
 {
     class GetServerInstanceCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} requesting ServerInstanceInfo", client.ID));
+            Log.Info(string.Format("Client {0} requesting ServerInstanceInfo", request.Client.ID));
 
             var data = new List<Tdf>
             {
@@ -27,7 +27,7 @@ namespace Blaze.Server
                 new TdfInteger("XDNS", 0)
             };
 
-            client.Reply(request, 0, data);
+            request.Reply(0, data);
         }
     }
 }

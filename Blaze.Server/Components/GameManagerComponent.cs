@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class GameManagerComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 1:
-                    CreateGameCommand.HandleRequest(client, request);
+                    CreateGameCommand.HandleRequest(request);
                     break;
 
                 //case 2:
@@ -21,23 +21,23 @@ namespace Blaze.Server
                 //    break;
 
                 case 3:
-                    AdvanceGameStateCommand.HandleRequest(client, request);
+                    AdvanceGameStateCommand.HandleRequest(request);
                     break;
 
                 case 4:
-                    SetGameSettingsCommand.HandleRequest(client, request);
+                    SetGameSettingsCommand.HandleRequest(request);
                     break;
 
                 //case 5:
-                //    SetPlayerCapacityCommand.HandleRequest(client, request);
+                //    SetPlayerCapacityCommand.HandleRequest(request);
                 //    break;
 
                 //case 7:
-                //    SetGameAttributesCommand.HandleRequest(client, request);
+                //    SetGameAttributesCommand.HandleRequest(request);
                 //    break;
 
                 case 9:
-                    JoinGameCommand.HandleRequest(client, request);
+                    JoinGameCommand.HandleRequest(request);
                     break;
 
                 //case 0xB:
@@ -46,11 +46,11 @@ namespace Blaze.Server
                 //    break;
 
                 case 0xF:
-                    FinalizeGameCreationCommand.HandleRequest(client, request);
+                    FinalizeGameCreationCommand.HandleRequest(request);
                     break;
 
                 case 0x1D:
-                    UpdateMeshConnectionCommand.HandleRequest(client, request);
+                    UpdateMeshConnectionCommand.HandleRequest(request);
                     break;
 
                 default:

@@ -9,40 +9,40 @@ namespace Blaze.Server
 {
     class UtilComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 1:
-                    FetchClientConfigCommand.HandleRequest(client, request);
+                    FetchClientConfigCommand.HandleRequest(request);
                     break;
 
                 case 2:
-                    PingCommand.HandleRequest(client, request);
+                    PingCommand.HandleRequest(request);
                     break;
 
                 case 5:
-                    GetTelemetryServerCommand.HandleRequest(client, request);
+                    GetTelemetryServerCommand.HandleRequest(request);
                     break;
 
                 case 7:
-                    PreAuthCommand.HandleRequest(client, request);
+                    PreAuthCommand.HandleRequest(request);
                     break;
 
                 case 8:
-                    PostAuthCommand.HandleRequest(client, request);
+                    PostAuthCommand.HandleRequest(request);
                     break;
 
                 case 0xB:
-                    UserSettingsSaveCommand.HandleRequest(client, request);
+                    UserSettingsSaveCommand.HandleRequest(request);
                     break;
 
                 case 0xC:
-                    UserSettingsLoadAllCommand.HandleRequest(client, request);
+                    UserSettingsLoadAllCommand.HandleRequest(request);
                     break;
 
                 case 0x16:
-                    SetClientMetricsCommand.HandleRequest(client, request);
+                    SetClientMetricsCommand.HandleRequest(request);
                     break;
 
                 default:

@@ -8,9 +8,9 @@ namespace Blaze.Server
 {
     class UpdateNetworkInfoCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} updating network info", client.ID));
+            Log.Info(string.Format("Client {0} updating network info", request.Client.ID));
 
             var addr = (TdfUnion)request.Data["ADDR"];
             var valu = (TdfStruct)addr.Data.Find(tdf => tdf.Label == "VALU");
@@ -19,13 +19,13 @@ namespace Blaze.Server
             var ip = (TdfInteger)inip.Data.Find(tdf => tdf.Label == "IP");
             var port = (TdfInteger)inip.Data.Find(tdf => tdf.Label == "PORT");
 
-            client.InternalIP = ip.Value;
-            client.InternalPort = (ushort)port.Value;
+            request.Client.InternalIP = ip.Value;
+            request.Client.InternalPort = (ushort)port.Value;
 
-            client.ExternalIP = ip.Value;
-            client.ExternalPort = (ushort)port.Value;
+            request.Client.ExternalIP = ip.Value;
+            request.Client.ExternalPort = (ushort)port.Value;
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Blaze.Server
 {
     class SetGameSettingsCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var gameID = (TdfInteger)request.Data["GID"];
             var gameSettings = (TdfInteger)request.Data["GSET"];
@@ -17,9 +17,9 @@ namespace Blaze.Server
 
             GameManager.Games[gameID.Value].Settings = gameSettings.Value;
 
-            client.Reply(request, 0, null);
+            request.Reply();
 
-            GameSettingsChangeNotification.Notify(client);
+            GameSettingsChangeNotification.Notify(request.Client);
         }
     }
 }

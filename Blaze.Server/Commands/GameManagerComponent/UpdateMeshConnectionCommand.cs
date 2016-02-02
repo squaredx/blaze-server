@@ -8,9 +8,9 @@ namespace Blaze.Server
 {
     class UpdateMeshConnectionCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
-            Log.Info(string.Format("Client {0} updating mesh connection", client.ID));
+            Log.Info(string.Format("Client {0} updating mesh connection", request.Client.ID));
 
             var gameID = (TdfInteger)request.Data["GID"];
 
@@ -19,36 +19,36 @@ namespace Blaze.Server
             var personaID = (TdfInteger)targData[1];
             var stat = (TdfInteger)targData[2];
 
-            client.Reply(request, 0, null);
+            request.Reply();
 
             if (stat.Value == 2)
             {
-                if (client.Type == ClientType.GameplayUser)
+                if (request.Client.Type == ClientType.GameplayUser)
                 {
-                    GamePlayerStateChangeNotification.Notify(client, gameID.Value, client.User.ID);
-                    PlayerJoinCompletedNotification.Notify(client, gameID.Value, client.User.ID);
+                    GamePlayerStateChangeNotification.Notify(request.Client, gameID.Value, request.Client.User.ID);
+                    PlayerJoinCompletedNotification.Notify(request.Client, gameID.Value, request.Client.User.ID);
                 }
-                else if (client.Type == ClientType.DedicatedServer)
+                else if (request.Client.Type == ClientType.DedicatedServer)
                 {
-                    GamePlayerStateChangeNotification.Notify(client, gameID.Value, personaID.Value);
-                    PlayerJoinCompletedNotification.Notify(client, gameID.Value, personaID.Value);
+                    GamePlayerStateChangeNotification.Notify(request.Client, gameID.Value, personaID.Value);
+                    PlayerJoinCompletedNotification.Notify(request.Client, gameID.Value, personaID.Value);
                 }
             }
             else if (stat.Value == 0)
             {
-                if (client.Type == ClientType.GameplayUser)
+                if (request.Client.Type == ClientType.GameplayUser)
                 {
                     var game = GameManager.Games[gameID.Value];
                     game.Slots.Remove(personaID.Value);
 
-                    PlayerRemovedNotification.Notify(client, client.User.ID);
+                    PlayerRemovedNotification.Notify(request.Client, request.Client.User.ID);
                 }
-                else if (client.Type == ClientType.DedicatedServer)
+                else if (request.Client.Type == ClientType.DedicatedServer)
                 {
                     var game = GameManager.Games[gameID.Value];
                     game.Slots.Remove(personaID.Value);
 
-                    PlayerRemovedNotification.Notify(client, personaID.Value);
+                    PlayerRemovedNotification.Notify(request.Client, personaID.Value);
                 }
             }
         }

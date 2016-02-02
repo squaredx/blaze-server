@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class RedirectorComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 1:
-                    GetServerInstanceCommand.HandleRequest(client, request);
+                    GetServerInstanceCommand.HandleRequest(request);
                     break;
 
                 default:

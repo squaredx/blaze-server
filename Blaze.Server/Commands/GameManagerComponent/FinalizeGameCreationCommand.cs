@@ -8,13 +8,13 @@ namespace Blaze.Server
 {
     class FinalizeGameCreationCommand
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             var gameID = (TdfInteger)request.Data["GID"];
 
-            Log.Info(string.Format("Client {0} updating game {1} session", client.ID, gameID.Value));
+            Log.Info(string.Format("Client {0} updating game {1} session", request.Client.ID, gameID.Value));
 
-            client.Reply(request, 0, null);
+            request.Reply();
         }
     }
 }

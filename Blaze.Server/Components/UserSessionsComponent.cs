@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class UserSessionsComponent
     {
-        public static void HandleRequest(Client client, Request request)
+        public static void HandleRequest(Request request)
         {
             switch (request.CommandID)
             {
                 case 0x14:
-                    UpdateNetworkInfoCommand.HandleRequest(client, request);
+                    UpdateNetworkInfoCommand.HandleRequest(request);
                     break;
 
                 default:
