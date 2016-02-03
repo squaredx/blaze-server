@@ -86,7 +86,6 @@ namespace Blaze.Server
             _logWriter.Write(stringToWrite);
             _logWriter.Flush();
             _logWriter.Close();
-            _logWriter.Dispose();
         }
 
         public static void Data(String message)

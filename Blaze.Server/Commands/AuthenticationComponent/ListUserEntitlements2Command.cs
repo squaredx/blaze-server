@@ -262,16 +262,12 @@ namespace Blaze.Server
                     }
                 });
 
-                var data = new List<Tdf>
-                {
-                    nlst
-                };
-
-                request.Reply(0, data);
-                return;
+                request.Reply(0, new List<Tdf> { nlst });
             }
-
-            request.Reply();
+            else
+            {
+                request.Reply();
+            }
         }
     }
 }
