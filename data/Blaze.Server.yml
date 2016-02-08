@@ -1,9 +1,3 @@
-Secure: true
-
-BlazeHubServerCertificate: gosredirector.ea.com.pfx
-
-BlazeServerCertificate: 373244-gosprapp357.ea.com.pfx
-
 Users:
   -
     ID: 1
