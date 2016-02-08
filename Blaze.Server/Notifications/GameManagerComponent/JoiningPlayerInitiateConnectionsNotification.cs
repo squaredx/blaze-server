@@ -72,7 +72,7 @@ namespace Blaze.Server
                         new TdfInteger("HPID", (ulong)client.GameID),
                         new TdfInteger("HSLT", 0)
                     }),
-                    new TdfString("UUID", ""),
+                    new TdfString("UUID", "714b05dc-93bc-49ac-961c-cb38b574f30a"),
                     new TdfInteger("VOIP", (ulong)game.VoipTopology),
                     new TdfString("VSTR", "67")
                 }),

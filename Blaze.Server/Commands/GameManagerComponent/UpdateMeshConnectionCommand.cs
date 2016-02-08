@@ -16,7 +16,7 @@ namespace Blaze.Server
 
             var targ = (TdfList)request.Data["TARG"];
             var targData = (List<Tdf>)targ.List[0];
-            var personaID = (TdfInteger)targData[1];
+            var playerID = (TdfInteger)targData[1];
             var stat = (TdfInteger)targData[2];
 
             request.Reply();
@@ -30,8 +30,8 @@ namespace Blaze.Server
                 }
                 else if (request.Client.Type == ClientType.DedicatedServer)
                 {
-                    GamePlayerStateChangeNotification.Notify(request.Client, gameID.Value, personaID.Value);
-                    PlayerJoinCompletedNotification.Notify(request.Client, gameID.Value, personaID.Value);
+                    GamePlayerStateChangeNotification.Notify(request.Client, gameID.Value, playerID.Value);
+                    PlayerJoinCompletedNotification.Notify(request.Client, gameID.Value, playerID.Value);
                 }
             }
             else if (stat.Value == 0)
@@ -39,16 +39,16 @@ namespace Blaze.Server
                 if (request.Client.Type == ClientType.GameplayUser)
                 {
                     var game = GameManager.Games[gameID.Value];
-                    game.Slots.Remove(personaID.Value);
+                    game.Slots.Remove(playerID.Value);
 
-                    PlayerRemovedNotification.Notify(request.Client, request.Client.User.ID);
+                    PlayerRemovedNotification.Notify(request.Client, playerID.Value);
                 }
                 else if (request.Client.Type == ClientType.DedicatedServer)
                 {
                     var game = GameManager.Games[gameID.Value];
-                    game.Slots.Remove(personaID.Value);
+                    game.Slots.Remove(playerID.Value);
 
-                    PlayerRemovedNotification.Notify(request.Client, personaID.Value);
+                    PlayerRemovedNotification.Notify(request.Client, playerID.Value);
                 }
             }
         }

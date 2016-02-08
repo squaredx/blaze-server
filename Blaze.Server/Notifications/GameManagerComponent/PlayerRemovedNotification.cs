@@ -8,12 +8,12 @@ namespace Blaze.Server
 {
     class PlayerRemovedNotification
     {
-        public static void Notify(Client client, ulong personaID)
+        public static void Notify(Client client, ulong playerID)
         {
             var data = new List<Tdf>
             {
                 new TdfInteger("GID", client.GameID),
-                new TdfInteger("PID", personaID),
+                new TdfInteger("PID", playerID),
                 new TdfInteger("REAS", 1)
             };
 

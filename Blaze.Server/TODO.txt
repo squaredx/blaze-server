@@ -1,4 +1,0 @@
-﻿* Test server with multiple players
-* Import stats from Battlelog to BlazeServer
-
-* finish stat handlers

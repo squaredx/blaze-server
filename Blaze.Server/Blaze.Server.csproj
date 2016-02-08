@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Certificate.cs" />
     <Compile Include="Base\Configuration.cs" />
     <Compile Include="Base\Request.cs" />
     <Compile Include="Base\Time.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Commands\AuthenticationComponent\SilentLoginCommand.cs" />
     <Compile Include="Commands\ClubsComponent\GetClubMembershipForUsersCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\CreateGameCommand.cs" />
+    <Compile Include="Commands\GameManagerComponent\DestroyGameCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\JoinGameCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\SetGameSettingsCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\UpdateMeshConnectionCommand.cs" />
@@ -128,9 +130,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="TODO.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,9 +16,9 @@ namespace Blaze.Server
                     CreateGameCommand.HandleRequest(request);
                     break;
 
-                //case 2:
-                //    Log.Warn("*destroyGame(game)");
-                //    break;
+                case 2:
+                    Log.Warn("DESTROY GAME");
+                    break;
 
                 case 3:
                     AdvanceGameStateCommand.HandleRequest(request);
@@ -28,22 +28,24 @@ namespace Blaze.Server
                     SetGameSettingsCommand.HandleRequest(request);
                     break;
 
-                //case 5:
-                //    SetPlayerCapacityCommand.HandleRequest(request);
-                //    break;
+                case 5:
+                    Log.Info("SET PLAYER CAPACITY");
+                    //SetPlayerCapacityCommand.HandleRequest(request);
+                    break;
 
-                //case 7:
-                //    SetGameAttributesCommand.HandleRequest(request);
-                //    break;
+                case 7:
+                    Log.Info("SET GAME ATTRIBUTES");
+                    //SetGameAttributesCommand.HandleRequest(request);
+                    break;
 
                 case 9:
                     JoinGameCommand.HandleRequest(request);
                     break;
 
-                //case 0xB:
-                //    //Log.Warn("*GameManager->HandleRemovePlayerCommand*");
-                //    //HandleRemovePlayerCommand(clientId, request, stream);
-                //    break;
+                case 0xB:
+                    Log.Warn("*GameManager->HandleRemovePlayerCommand*");
+                    //HandleRemovePlayerCommand(clientId, request, stream);
+                    break;
 
                 case 0xF:
                     FinalizeGameCreationCommand.HandleRequest(request);

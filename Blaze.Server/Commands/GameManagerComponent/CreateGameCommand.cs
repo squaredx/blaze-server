@@ -56,7 +56,7 @@ namespace Blaze.Server
 
             request.Client.GameID = game.ID;
 
-            Log.Info(string.Format("Client {0} creating game {1} ({2})", request.Client.ID, game.ID, game.Name));
+            Log.Info($"Client {request.Client.ID} creating game {game.ID} ({game.Name})");
 
             var data = new List<Tdf>
             {

@@ -12,7 +12,7 @@ namespace Blaze.Server
         {
             Log.Info(string.Format("Client {0} requesting ServerInstanceInfo", request.Client.ID));
 
-            var data = new List<Tdf>
+            request.Reply(0, new List<Tdf>
             {
                 new TdfUnion("ADDR", NetworkAddressMember.XboxClientAddress, new List<Tdf>
                 {
@@ -25,9 +25,7 @@ namespace Blaze.Server
                 }),
                 new TdfInteger("SECU", 1),
                 new TdfInteger("XDNS", 0)
-            };
-
-            request.Reply(0, data);
+            });
         }
     }
 }

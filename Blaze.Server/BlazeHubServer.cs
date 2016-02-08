@@ -46,7 +46,7 @@ namespace Blaze.Server
             {
                 var clientSocket = (Socket)socket.EndAccept(ar);
 
-                Log.Info(string.Format("Client connected from {0}", clientSocket.RemoteEndPoint.ToString()));
+                Log.Info($"Client connected from {clientSocket.RemoteEndPoint.ToString()}");
 
                 var client = new Client();
 
@@ -57,9 +57,7 @@ namespace Blaze.Server
 
                 Clients.Add(client.ID, client);
 
-                var certificate = File.ReadAllBytes("gosredirector.ea.com.pfx");
-
-                client.Stream.BeginAuthenticateAsServer(new X509Certificate2(certificate, "123456"), AuthenticateAsServerCallback, client.ID);
+                client.Stream.BeginAuthenticateAsServer(Certificate.BlazeHubServer, AuthenticateAsServerCallback, client.ID);
             }
             catch (Exception ex)
             {
@@ -133,6 +131,8 @@ namespace Blaze.Server
                 catch { }
 
                 client.Socket.Close();
+
+                Log.Info($"Client {clientID} disconnected");
             }
             catch (Exception ex)
             {

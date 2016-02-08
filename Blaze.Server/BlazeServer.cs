@@ -46,7 +46,7 @@ namespace Blaze.Server
             {
                 var clientSocket = (Socket)socket.EndAccept(ar);
 
-                Log.Info(string.Format("Client connected from {0}", clientSocket.RemoteEndPoint.ToString()));
+                Log.Info($"Client connected from {clientSocket.RemoteEndPoint.ToString()}");
 
                 var client = new Client();
 
@@ -57,9 +57,7 @@ namespace Blaze.Server
 
                 Clients.Add(client.ID, client);
 
-                var certificate = File.ReadAllBytes("373244-gosprapp357.ea.com.pfx");
-
-                client.Stream.BeginAuthenticateAsServer(new X509Certificate2(certificate, "123456"), AuthenticateAsServerCallback, client.ID);
+                client.Stream.BeginAuthenticateAsServer(Certificate.BlazeServer, AuthenticateAsServerCallback, client.ID);
             }
             catch (Exception ex)
             {
@@ -118,6 +116,19 @@ namespace Blaze.Server
                 var clientID = (long)ar.AsyncState;
                 var client = Clients[clientID];
 
+                if (client.Type == ClientType.DedicatedServer)
+                {
+                    lock (GameManager.Games)
+                    {
+                        if (GameManager.Games.ContainsKey(client.GameID))
+                        {
+                            Log.Info($"Removing game {client.GameID}");
+
+                            GameManager.Games.Remove(client.GameID);
+                        }
+                    }
+                }
+
                 lock (Clients)
                 {
                     if (Clients.ContainsKey(client.ID))
@@ -133,6 +144,8 @@ namespace Blaze.Server
                 catch { }
 
                 client.Socket.Close();
+
+                Log.Info($"Client {clientID} disconnected");
             }
             catch (Exception ex)
             {

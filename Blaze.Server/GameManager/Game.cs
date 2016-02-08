@@ -51,8 +51,7 @@ namespace Blaze.Server
 
         public Game()
         {
-            Slots = new List<ulong>();
-            Slots.Add(0); // hack, because slot ID should not be 0
+            Slots = new List<ulong>() { 0 };
         }
     }
 }
