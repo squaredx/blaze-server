@@ -1,15 +1,11 @@
-Usage
-================
+The required files are in the 'data' directory. The server must be compiled manually.
 
-- Edit your hosts file and add this:
+Make sure you edit the personaref value (_StartGame.bat) so that it matches the user ID of the user you want to authenticate with (Blaze.Server.yml).
+You can add more users by editing BlazeServer.yml.
 
-127.0.0.1 gosredirector.ea.com
-127.0.0.1 373244-gosprapp357.ea.com
+The provided bf3_lan.exe is a dumped executable of the 1.6.0.0 version (latest as of 2016).
+SSL certificate verification is patched in the executable.
 
-- Copy bf3_lan.exe to your Battlefield 3 folder.
-
-- Copy _StartGame.bat to your Battlefield 3 folder.
-
-- Edit your _StartGame.bat to match your Blaze.Server.yml configuration (personaref value must match the user ID of the user you want to use)
-
-- Run Blaze.Server.exe
+Before playing, make sure to edit your hosts file and redirect the following hosts:
+gosredirector.ea.com
+373244-gosprapp357.ea.com
