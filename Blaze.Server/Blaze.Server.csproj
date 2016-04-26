@@ -78,7 +78,10 @@
     <Compile Include="Commands\GameManagerComponent\CreateGameCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\DestroyGameCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\JoinGameCommand.cs" />
+    <Compile Include="Commands\GameManagerComponent\SetGameAttributesCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\SetGameSettingsCommand.cs" />
+    <Compile Include="Commands\GameManagerComponent\SetPlayerCapacityCommand.cs" />
+    <Compile Include="Commands\GameManagerComponent\UpdateGameNameCommand.cs" />
     <Compile Include="Commands\GameManagerComponent\UpdateMeshConnectionCommand.cs" />
     <Compile Include="Commands\GameReportingComponent\SubmitTrustedEndGameReportCommand.cs" />
     <Compile Include="Commands\GameReportingComponent\SubmitTrustedMidGameReportCommand.cs" />

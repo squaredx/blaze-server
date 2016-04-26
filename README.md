@@ -1,3 +1,5 @@
+#Battlefield 3 Blaze Server
+_the following will be unnecessary in future updates_
 The required files are in the 'data' directory. The server must be compiled manually.
 
 Make sure you edit the personaref value (_StartGame.bat) so that it matches the user ID of the user you want to authenticate with (Blaze.Server.yml).

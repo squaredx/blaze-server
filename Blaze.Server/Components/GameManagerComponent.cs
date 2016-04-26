@@ -29,13 +29,11 @@ namespace Blaze.Server
                     break;
 
                 case 5:
-                    Log.Info("SET PLAYER CAPACITY");
-                    //SetPlayerCapacityCommand.HandleRequest(request);
+                    SetPlayerCapacityCommand.HandleRequest(request);
                     break;
 
                 case 7:
-                    Log.Info("SET GAME ATTRIBUTES");
-                    //SetGameAttributesCommand.HandleRequest(request);
+                    SetGameAttributesCommand.HandleRequest(request);
                     break;
 
                 case 9:
@@ -55,6 +53,9 @@ namespace Blaze.Server
                     UpdateMeshConnectionCommand.HandleRequest(request);
                     break;
 
+                case 0x27:
+                    UpdateGameNameCommand.HandleRequest(request);
+                    break;
                 default:
                     Log.Warn(string.Format("Unhandled request: {0} {1}", request.ComponentID, request.CommandID));
                     break;
